@@ -1,4 +1,4 @@
-const HoaDonModel = require('../models/hoadon');
+const HoaDonModel = require('../models/hoadon.model');
 
 class UserController {
     // [POST] /api/user/hoa-don
@@ -15,7 +15,7 @@ class UserController {
 
             return res.json({ success: true, message: 'Lap hoa don thanh cong', HoaDon });
         } catch (err) {
-            res.status(400).json({ message: 'FAILLLL', err });
+            res.status(400).json({ success: false, message: 'Lap hoa don that bai', err });
         }
     }
 }
