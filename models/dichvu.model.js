@@ -4,28 +4,43 @@ const Schema = mongoose.Schema;
 const DichVuSchema = new Schema({
     tendichvu: {
         type: String,
-        required: true
+        required: true,
     },
     mota: {
         type: String,
-        required: true
+        required: true,
     },
     chiphi: {
-        type: String,
-        required: true
+        type: Number,
+        required: true,
     },
     tgdukien: {
-        type: Number,
-        required: true
+        value: {
+            type: Number,
+            required: true,
+        },
+        unit: {
+            type: String,
+            required: true,
+            enum: ['ngay', 'gio'],
+        },
     },
     tgbaohanh: {
-        type: String,
-        required: true
+        value: {
+            type: Number,
+            required: true,
+        },
+        unit: {
+            type: String,
+            required: true,
+            enum: ['ngay', 'thang'],
+        },
     },
     loaidichvu: {
-        type: Schema.Types.ObjectId,
-        ref: 'loaidichvu'
-    }
-})
+        type: String,
+        required: true,
+        enum: ['Dịch vụ lẻ', 'Combo'],
+    },
+});
 
 module.exports = mongoose.model('dichvu', DichVuSchema);

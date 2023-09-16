@@ -7,4 +7,6 @@ router.post('/staff-register', NhanVienController.nvdangky);
 router.post('/staff-login', NhanVienController.nvdangnhap);
 router.get('/all-staff', middleware.verifyToken, NhanVienController.getallnv);
 
+
+
 module.exports = router;

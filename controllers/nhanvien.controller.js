@@ -11,9 +11,12 @@ class NhanVienController {
         if (!username || !email || !password)
             return res.status(400).json({ success: false, message: 'Chưa nhập username hoặc password' });
         try {
-            const user = await User.findOne({ username });
+            const alreadyUser = await User.findOne({ username });
+            const alreadyEmail = await NhanVien.findOne({ email });
 
-            if (user) return res.json({ success: false, message: 'Tên tài khoản đã tồn tại' });
+            if (alreadyUser) return res.json({ success: false, message: 'Tên tài khoản đã tồn tại' });
+            if (alreadyEmail) return res.json({ success: false, message: 'Email đã được sử dụng' });
+
             const hasdedPassword = await argon2.hash(password);
             const newUser = await User.create({
                 username,
@@ -60,24 +63,24 @@ class NhanVienController {
                     {
                         userId: user._id,
                         nhanvien: user.nhanvien,
-                        khach: user.khach
+                        khach: user.khach,
                     },
                     process.env.ACCESS_TOKEN_SECRET,
-                    { expiresIn: '2h' },
+                    { expiresIn: '2d' },
                 );
                 return res.status(200).json({ success: true, message: 'Đăng nhập thành công', user, accessToken });
             }
         } catch (error) {
-            res.json({success:false, error});
+            res.json({ success: false, error });
         }
     }
 
     async getallnv(req, res) {
         try {
-            const nv = await User.find({nhanvien: true})
-            res.json({success: true, message: 'Get all nhanvien successfully', nv})
-        }catch(err) {
-            res.json({success: false, message: 'Cannot get all nhanvien', err})
+            const nv = await User.find({ nhanvien: true });
+            res.json({ success: true, message: 'Get all nhanvien successfully', nv });
+        } catch (err) {
+            res.json({ success: false, message: 'Cannot get all nhanvien', err });
         }
     }
 }
