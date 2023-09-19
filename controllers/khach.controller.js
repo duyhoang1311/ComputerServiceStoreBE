@@ -5,7 +5,7 @@ const Khach = require('../models/khach.model');
 
 class KhachController {
     async khachDangKy(req, res) {
-        const { username, email, password, hoten, ngaysinh, gioitinh, sdt } = req.body;
+        const { username, email, password, hoten, sdt } = req.body;
 
         // input validation
         if (!username || !email || !password)
@@ -28,8 +28,6 @@ class KhachController {
             const newKhach = await Khach.create({
                 email,
                 hoten,
-                ngaysinh,
-                gioitinh,
                 sdt,
                 user: newUser._id,
             });

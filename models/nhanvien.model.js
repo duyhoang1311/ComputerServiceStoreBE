@@ -6,14 +6,14 @@ const NhanVienSchema = new Schema({
         type: String,
         required: true,
     },
-    ngaysinh: {
-        type: Date,
-        required: true,
-    },
-    gioitinh: {
-        type: Boolean,
-        required: true,
-    },
+    // ngaysinh: {
+    //     type: Date,
+    //     required: true,
+    // },
+    // gioitinh: {
+    //     type: Boolean,
+    //     required: true,
+    // },
     sdt: {
         type: String,
         required: true,
