@@ -22,7 +22,7 @@ const DichVuSchema = new Schema({
         unit: {
             type: String,
             required: true,
-            enum: ['ngay', 'gio'],
+            enum: ['ngày', 'giờ'],
         },
     },
     tgbaohanh: {
@@ -33,12 +33,11 @@ const DichVuSchema = new Schema({
         unit: {
             type: String,
             required: true,
-            enum: ['ngay', 'thang'],
+            enum: ['ngày', 'tháng'],
         },
     },
     loaidichvu: {
         type: String,
-        required: true,
         enum: ['Dịch vụ lẻ', 'Combo'],
     },
 });

@@ -36,6 +36,36 @@ class DichVuController {
             res.json({ success: false, message: 'Thêm dịch vụ mới thất bại', error });
         }
     }
+
+    async xoaDichVu(req, res) {
+        try {
+            const deletedDichVu = await DichVu.findByIdAndDelete(req.params._id, req.body);
+
+            if (!deletedDichVu) {
+                return res.json({ success: false, message: `Không tìm thấy dịch vụ với id ${req.params._id}` });
+            }
+
+            res.json({ success: true, message: 'Xóa dịch vụ thành công', deletedDichVu });
+        } catch (error) {
+            res.json({ success: false, message: 'Không thể xóa dịch vụ', error });
+        }
+    }
+
+    async suaDichVu(req, res) {
+        try {
+            const idDichVu = req.params._id;
+            const updatedDichVu = req.body;
+
+            const checkedDichVu = await DichVu.findByIdAndUpdate(idDichVu, updatedDichVu, { new: true });
+
+            if(!checkedDichVu) {
+                res.json({success: false, message: `Không thể tìm thấy dịch vụ với ${idDichVu}`})
+            }
+            res.json({success: true, message: 'Cập nhật dịch vụ thành công', checkedDichVu})
+        } catch (err) {
+            res.json({ success: false, message: 'Không thể cập nhật dịch vụ', err });
+        }
+    }
 }
 
 module.exports = new DichVuController();
